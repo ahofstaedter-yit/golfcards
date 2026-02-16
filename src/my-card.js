@@ -1,116 +1,121 @@
 import { LitElement, html, css } from 'lit';
 
 /**
- * Now it's your turn. Here's what we need to try and do:
- * 1. Get you HTML from your card working in here 
- * 2. Get your CSS rescoped as needed to work here
+ * GolfCourseCard component
+ * A reusable card for displaying golf course information
  */
-
-export class MyCard extends LitElement {
-
-  static get tag() {
-    return 'my-card';
-  }
-
-  constructor() {
-    super();
-    this.title = "Harbour Town Golf Links";
-    this.image = "https://www.seapines.com/sites/default/files/styles/hole_mobile/public/media/images/Hornstein_HT_hole18a.jpg?h=4c16fd0c&itok=09MrKA9m";
-    this.description = "One of the most celebrated courses on the PGA TOUR, Harbour Town® is both the crowning achievement of famed designer Pete Dye and design consultant Jack Nicklaus. It places a premium on finesse, imagination, and shot making, rather than strength.";
-    this.link = "https://hax.psu.edu";
+export class GolfCourseCard extends LitElement {
+  static get properties() {
+    return {
+      title: { type: String },
+      location: { type: String },
+      holes: { type: String },
+      fancy: { type: Boolean, reflect: true }
+    };
   }
 
   static get styles() {
     return css`
       :host {
         display: block;
-      }
-      .card {
         width: 300px;
-        background-color: white;
-        border-radius: 16px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        margin: 25px;
-        border: black 2px solid;
-        display: inline-block;
-      }
-      .image img {
-        width: 300px;
-        height: 200px;
+        border: 2px solid var(--golf-card-border-color, #2e7d32);
         border-radius: 8px;
+        padding: 16px;
+        margin: 16px;
+        background-color: var(--golf-card-bg, #ffffff);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
       }
-      .heading {
-        text-align: center;
+
+      :host([fancy]) {
+        background-color: var(--golf-card-fancy-bg, #fff3e0);
+        border: 3px solid var(--golf-card-fancy-border, #ff6f00);
+        box-shadow: 10px 5px 15px var(--golf-card-fancy-shadow, #ffab40);
+        transform: scale(1.05);
       }
-      .paragraph {
-        color: black;
-        font-size: 16px;
-        margin: 10px;
-        text-align: left;
+
+      .card-header {
+        border-bottom: 2px solid var(--golf-card-border-color, #2e7d32);
+        padding-bottom: 8px;
+        margin-bottom: 12px;
       }
-      .button {
-        display: none;
-        background-color: blue;
-        color: white;
-        font-size: 18px;
-        border: none;
-        padding: 12px 10px;
-        text-align: center;
-        margin: 2px 10px 20px 30px;
-        width: 80%;
-        border-radius: 8px;
+
+      h2 {
+        margin: 0 0 8px 0;
+        color: var(--golf-card-title-color, #1b5e20);
+        font-size: 1.5em;
+      }
+
+      .meta {
+        display: flex;
+        gap: 16px;
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 12px;
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      details {
+        margin-top: 12px;
+      }
+
+      summary {
         cursor: pointer;
+        font-weight: bold;
+        color: var(--golf-card-title-color, #1b5e20);
+        padding: 8px;
+        background-color: var(--golf-card-summary-bg, #f1f8e9);
+        border-radius: 4px;
+        user-select: none;
       }
-      @media (min-width: 500px) and (max-width: 800px) {
-        .button {
-          display: block;
-        }
+
+      summary:hover {
+        background-color: var(--golf-card-summary-hover, #dcedc8);
       }
-      @media (max-width: 500px) {
-        .card {
-          width: 250px;
-        }
-        .image img {
-          width: 250px;
-          height: 150px;
-        }
-        .paragraph {
-          font-size: 14px;
-        }
+
+      .description {
+        padding: 12px 8px;
+        line-height: 1.6;
       }
-      .button:focus,
-      .button:hover {
-        background-color: black;
+
+      ::slotted(p) {
+        margin: 0 0 8px 0;
       }
-      .bg-change {
-        background-color: pink;
-        color: white;
+
+      ::slotted(strong) {
+        color: var(--golf-card-title-color, #1b5e20);
       }
     `;
   }
 
-  render() {
-  return html`
-    <div class="card">
-      <div class="image">
-        <img src="${this.image}" alt="${this.title}">
-      </div>
-      <h3 class="heading">${this.title}</h3>
-      <p class="paragraph">${this.description}</p>
-      <a href="${this.link}">
-        <button class="button">Details</button>
-      </a>
-    </div>
-  `;
-}
-  static get properties() {
-    return {
-      title: { type: String },
-      image: { type: String },
-      description: { type: String },
-      link: { type: String }
-    };
+  constructor() {
+    super();
+    this.title = 'Golf Course';
+    this.location = 'Unknown';
+    this.holes = '18';
+    this.fancy = false;
   }
-}
 
-globalThis.customElements.define(MyCard.tag, MyCard);
+  /**
+   * Handles the toggle event from the details element
+   * Syncs the fancy property with the details open state
+   */
+  openChanged(e) {
+    this.fancy = e.target.open;
+  }
+
+  render() {
+    return html`
+      <div class="card-header">
+        <h2>${this.title}</h2>
+      </div>
+      
+      <div class="meta">
+        <div class="meta-item">
+          <span>📍</sp>

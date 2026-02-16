@@ -11,51 +11,73 @@
       background-color: #f0f0f0;
       font-family: Arial, sans-serif;
     }
+
+    /* CSS Variable Customization - REQUIRED BY ASSIGNMENT */
+    golf-course-card[fancy] {
+      --golf-card-fancy-bg: #FFD700;
+      --golf-card-fancy-border: #FF6B35;
+      --golf-card-fancy-shadow: rgba(255, 107, 53, 0.5);
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
   </style>
 </head>
 <body>
   
   <h1>Golf Course Collection</h1>
   
-  <!-- Card 1: Harbour Town Golf Links -->
-  <my-card
-    title="Harbour Town Golf Links"
-    image="https://www.seapines.com/sites/default/files/styles/hole_mobile/public/media/images/Hornstein_HT_hole18a.jpg?h=4c16fd0c&itok=09MrKA9m"
-    description="One of the most celebrated courses on the PGA TOUR, Harbour Town® is both the crowning achievement of famed designer Pete Dye and design consultant Jack Nicklaus. It places a premium on finesse, imagination and shot making, rather than strength."
-    link="https://www.seapines.com/golf/harbour-town">
-  </my-card>
+  <div class="cards-container">
+    
+    <!-- Card 1: Harbour Town Golf Links -->
+    <golf-course-card
+      title="Harbour Town Golf Links"
+      location="Hilton Head, SC"
+      holes="18">
+      <p>One of the most celebrated courses on the <strong>PGA TOUR</strong>, Harbour Town is both the crowning achievement of famed designer <strong>Pete Dye</strong> and design consultant Jack Nicklaus.</p>
+      <p>It places a premium on finesse, imagination and shot making, rather than strength.</p>
+    </golf-course-card>
 
-  <!-- Card 2: Pebble Beach Golf Links -->
-  <my-card
-    title="Pebble Beach Golf Links"
-    image="https://www.pebblebeach.com/content/uploads/20160811-cam-timeout.jpg"
-    description="Pebble Beach Golf Links is widely regarded as one of the most beautiful courses in the world. Since opening in 1919, this legendary links-style course has hosted numerous U.S. Opens and remains a bucket-list destination for golfers."
-    link="https://www.pebblebeach.com">
-  </my-card>
+    <!-- Card 2: Pebble Beach Golf Links - WITH FANCY! -->
+    <golf-course-card fancy
+      title="Pebble Beach Golf Links"
+      location="Pebble Beach, CA"
+      holes="18">
+      <p>Pebble Beach is widely regarded as one of the most <strong>beautiful courses</strong> in the world.</p>
+      <p>Since opening in 1919, this legendary links-style course has hosted numerous <strong>U.S. Opens</strong>.</p>
+    </golf-course-card>
 
-  <!-- Card 3: Augusta National -->
-  <my-card
-    title="Augusta National Golf Club"
-    image="https://golf.com/wp-content/uploads/2020/04/augusta-national-12.jpg"
-    description="Home of the Masters Tournament, Augusta National is one of the most exclusive and prestigious golf clubs in the world. The course features iconic holes like Amen Corner and beautiful azalea-lined fairways."
-    link="https://www.masters.com">
-  </my-card>
+    <!-- Card 3: Augusta National -->
+    <golf-course-card
+      title="Augusta National Golf Club"
+      location="Augusta, GA"
+      holes="18">
+      <p>Home of the <strong>Masters Tournament</strong>, Augusta National is one of the most exclusive and prestigious golf clubs in the world.</p>
+      <p>The course features iconic holes like <strong>Amen Corner</strong> and beautiful azalea-lined fairways.</p>
+    </golf-course-card>
 
-  <!-- Card 4: St Andrews Old Course -->
-  <my-card
-    title="St Andrews Old Course"
-    image="https://images.squarespace-cdn.com/content/v1/5675d7b05a5668f86eba496c/c14db7f8-819a-46d1-9390-69d3fee17d49/IMG_9857+resize.JPG"
-    description="Known as the 'Home of Golf,' the Old Course at St Andrews has been played since the 15th century. Its unique double greens, deep bunkers, and unpredictable Scottish weather make it a true test of golf."
-    link="https://www.standrews.com">
-  </my-card>
+    <!-- Card 4: St Andrews Old Course - WITH FANCY! -->
+    <golf-course-card fancy
+      title="St Andrews Old Course"
+      location="St Andrews, Scotland"
+      holes="18">
+      <p>Known as the <strong>'Home of Golf'</strong>, the Old Course at St Andrews has been played since the 15th century.</p>
+      <p>Its unique double greens, deep bunkers, and unpredictable Scottish weather make it a <strong>true test of golf</strong>.</p>
+    </golf-course-card>
 
-  <!-- Card 5: Pinehurst No. 2 -->
-  <my-card
-    title="Pinehurst No. 2"
-    image="https://cdn-ilbbpdb.nitrocdn.com/ZPvHxDAnfjiOCTRKZzZlFwdZrjJUwSbC/assets/images/optimized/rev-cd33dd5/www.pinehurst.com/wp-content/uploads/2022/11/No2_Hole_9_01.jpg"
-    description="Designed by Donald Ross, Pinehurst No. 2 is known for its crowned greens and strategic bunkering. It has hosted more single golf championships than any other course in America, including multiple U.S. Opens."
-    link="https://www.pinehurst.com">
-  </my-card>
+    <!-- Card 5: Pinehurst No. 2 -->
+    <golf-course-card
+      title="Pinehurst No. 2"
+      location="Pinehurst, NC"
+      holes="18">
+      <p>Designed by <strong>Donald Ross</strong>, Pinehurst No. 2 is known for its crowned greens and strategic bunkering.</p>
+      <p>It has hosted more single golf championships than any other course in America, including multiple <strong>U.S. Opens</strong>.</p>
+    </golf-course-card>
+
+  </div>
 
 </body>
 </html>
