@@ -1,15 +1,15 @@
 import { LitElement, html, css } from 'lit';
+import "@haxtheweb/meme-maker/meme-maker.js";
 
-/**
- * GolfCourseCard component
- * A reusable card for displaying golf course information
- */
 export class GolfCourseCard extends LitElement {
   static get properties() {
     return {
       title: { type: String },
       location: { type: String },
       holes: { type: String },
+      image: { type: String },
+      topText: { type: String, attribute: 'top-text' },
+      bottomText: { type: String, attribute: 'bottom-text' },
       fancy: { type: Boolean, reflect: true }
     };
   }
@@ -26,13 +26,6 @@ export class GolfCourseCard extends LitElement {
         background-color: var(--golf-card-bg, #ffffff);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
-      }
-
-      :host([fancy]) {
-        background-color: var(--golf-card-fancy-bg, #fff3e0);
-        border: 3px solid var(--golf-card-fancy-border, #ff6f00);
-        box-shadow: 10px 5px 15px var(--golf-card-fancy-shadow, #ffab40);
-        transform: scale(1.05);
       }
 
       .card-header {
@@ -59,6 +52,11 @@ export class GolfCourseCard extends LitElement {
         display: flex;
         align-items: center;
         gap: 4px;
+      }
+
+      meme-maker {
+        width: 100%;
+        --meme-maker-font-size: 10px;
       }
 
       details {
@@ -99,15 +97,10 @@ export class GolfCourseCard extends LitElement {
     this.title = 'Golf Course';
     this.location = 'Unknown';
     this.holes = '18';
+    this.image = '';
+    this.topText = '';
+    this.bottomText = '';
     this.fancy = false;
-  }
-
-  /**
-   * Handles the toggle event from the details element
-   * Syncs the fancy property with the details open state
-   */
-  openChanged(e) {
-    this.fancy = e.target.open;
   }
 
   render() {
@@ -115,7 +108,34 @@ export class GolfCourseCard extends LitElement {
       <div class="card-header">
         <h2>${this.title}</h2>
       </div>
-      
+
       <div class="meta">
         <div class="meta-item">
-          <span>📍</sp>
+          <span>📍</span>
+          <span>${this.location}</span>
+        </div>
+        <div class="meta-item">
+          <span>⛳</span>
+          <span>${this.holes} holes</span>
+        </div>
+      </div>
+
+      <meme-maker
+        image-url="${this.image}"
+        top-text="${this.topText}"
+        bottom-text="${this.bottomText}"
+      ></meme-maker>
+
+      <details>
+        <summary>Description</summary>
+        <div class="description">
+          <slot>
+            <p>Click to add course description...</p>
+          </slot>
+        </div>
+      </details>
+    `;
+  }
+}
+
+customElements.define('golf-course-card', GolfCourseCard);
